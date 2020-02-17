@@ -1,4 +1,4 @@
-This Github repository contains the code and data to used for in the published study: 
+This Github repository contains the code and data to used in the study: 
 "Mutational signature in colorectal cancer caused by genotoxic *pks<sup>+</sup> E. coli* ",
 C. Pleguezuelos-Manzano, J. Puschhof and A. Rosendahl Huber et al. 
 
