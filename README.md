@@ -1,15 +1,16 @@
-This Github repository contains the code and data to used for in the published study: "Mutational signature in colorectal cancer caused by genotoxic pks+ E. coli ", C. Pleguezuelos-Manzano, J. Puschhof and A. Rosendahl Huber et al. doi: https://doi.org/10.1038/s41586-020-2080-8  
+This Github repository contains the code and data to used for in the published study: "Mutational signature in colorectal cancer caused by genotoxic pks+ E. coli ", C. Pleguezuelos-Manzano, J. Puschhof and A. Rosendahl Huber et al. 
+
+https://www.nature.com/articles/s41586-020-2080-8
+DOI: https://doi.org/10.1038/s41586-020-2080-8
 
 For questions or suggestions: Please contact a.k.m.rosendahlhuber@prinsesmaximacentrum.nl
 
 Please cite this paper when using this code for your research. BAM files containing the raw sequencing dat have been deposited at the European Genome-phenome Archive (https://ega-archive.org/) under the accesion code: EGAS00001003934.
 
 
-Dependencies: R version 3.6.0
-
-
 ### ---- Usage ----- 
 Workflow: For the most easily deployment, unzip Genotoxic_Ecoli.zip folder. Set working directory in script #1 and execute R scripts following numbering 1-9.
+Dependencies: R version 3.6.0
 
 1. Load data and analyze single base substitution load
 
