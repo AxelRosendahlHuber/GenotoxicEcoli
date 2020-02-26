@@ -27,6 +27,7 @@ plot_indels <- function(vcfs_grl, path, vcf_fnames) {
 }
 
 ####_____________________Indel___________________####
+setwd(dir)
 vcf_fnames = list.files("Data/STE0072/I5/Indels/", recursive = T, full.names = T)
 sample_names = gsub("_.*$", "", basename(vcf_fnames))
 

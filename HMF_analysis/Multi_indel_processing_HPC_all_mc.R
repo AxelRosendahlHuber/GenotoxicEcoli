@@ -1,22 +1,26 @@
+# Code accompanying the publication # "Mutational signature in colorectal cancer induced by genotoxic pks+ E.Coli"
+# C. Pleguezuelos-Manzano, J. Puschhof and A. Rosendahl Huber et al.
+
+# Please direct any questions or comments to A.K.M.RosendahlHuber@prinsesmaximacentrum.nl
+
+# NOTE: This script uses patient-level somatic variant and clinical data obtained from the Hartwig Medical Foundation. 
+
+
+# ---- HMF -----
+# NOTE: This script uses patient-level somatic variant and clinical data which have been obtained from the Hartwig Medical Foundation under the data request number DR-084. Somatic variant and clinical data are freely available for academic use from the Hartwig Medical Foundation through standardized procedures. Privacy and publication policies, including co-authorship policies, can be retrieved from: https://www.hartwigmedicalfoundation.nl/en/data-policy/. 
+# Data request forms can be downloaded from https://www.hartwigmedicalfoundation.nl/en/applying-for-data/.
+# To gain access to the data, this data request form should be emailed to info@hartwigmedicalfoundation.nl., upon which it will be evaluated within 6 weeks by the HMF Scientific Council and an independent Data Access Board.
+# When access is granted, the requested data become available through a download link provided by HMF.
+
 # Get Multi-indels for the entire HMF-dataset. 
-source("/hpc/pmc_vanboxtel/tools/scripts/Axel_misc/pks_context_selection_functions_v2.R")
-source("/hpc/pmc_vanboxtel/tools/scripts/Axel_misc/Multi_bp_indel_pks_classification.R")
-source("/hpc/pmc_vanboxtel/tools/scripts/Axel_misc/functions/id_context.R")
-library(VariantAnnotation)
-library(GenomicRanges)
-library(tidyverse)
-library(BSgenome)
-library(BSgenome.Hsapiens.UCSC.hg19)
-library(reshape2)
-library(pracma)
-library(magrittr)
-ref_genome = "BSgenome.Hsapiens.UCSC.hg19"
+setwd(dir)
+source("Utils.R")
+source("/HMF_analysis/pks_context_selection_functions_v2.R")
 n_cores = 8
 
-setwd("/hpc/pmc_vanboxtel/projects/Axel_GenoEcoli/HMF_analysis/Multi_indel/")
 
 # 31 CRC double positive samples 
-vcf_fnames = list.files("/hpc/pmc_vanboxtel/projects/Axel_GenoEcoli/HMF_analysis/somatics/", pattern = "*somatic.vcf$", recursive = T, full.names = T)
+vcf_fnames = list.files("HMF vcf folder", pattern = "*somatic.vcf.gz$", recursive = T, full.names = T)
 sample_names = basename(vcf_fnames) %>% gsub(pattern = ".purple.somatic.vcf", replacement = "")
 
 #Read in indels. (You can't use read_vcfs_as_granges as this function removes indels)

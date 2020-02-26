@@ -6,7 +6,7 @@
 # NOTE: This script uses patient-level somatic variant and clinical data obtained from the Hartwig Medical Foundation. 
 
 # ---- HMF -----
-# NOTE: This script uses patient-level somatic variant and clinical data have been obtained from the Hartwig Medical Foundation under the data request number DR-084. Somatic variant and clinical data are freely available for academic use from the Hartwig Medical Foundation through standardized procedures. Privacy and publication policies, including co-authorship policies, can be retrieved from: https://www.hartwigmedicalfoundation.nl/en/data-policy/. 
+# NOTE: This script uses patient-level somatic variant and clinical data which have been obtained from the Hartwig Medical Foundation under the data request number DR-084. Somatic variant and clinical data are freely available for academic use from the Hartwig Medical Foundation through standardized procedures. Privacy and publication policies, including co-authorship policies, can be retrieved from: https://www.hartwigmedicalfoundation.nl/en/data-policy/. 
 # Data request forms can be downloaded from https://www.hartwigmedicalfoundation.nl/en/applying-for-data/.
 # To gain access to the data, this data request form should be emailed to info@hartwigmedicalfoundation.nl., upon which it will be evaluated within 6 weeks by the HMF Scientific Council and an independent Data Access Board.
 # When access is granted, the requested data become available through a download link provided by HMF.
@@ -15,11 +15,9 @@
 # NOTE: This script requires input generated from the HMF source data using scripts in the folder 'HMF_analysis'
 
 # Axel Rosendahl Huber
-library(ggplot2)
-source("~/surfdrive/Shared/Boxtel_General/Scripts/pmc_vanboxtel/Axel_misc/pks_context_selection_functions.R")
-source("~/surfdrive/Shared/Boxtel_General/Scripts/pmc_vanboxtel/Axel_misc/Multi_bp_indel_pks_classification.R")
-source("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/Manuscript/Genotoxic_Ecoli/8_Figure4AB_HMF_refitting.R")
-setwd("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/Multi_indels/HMF/")
+setwd(dir)
+source("Utils.R")
+source("8_Figure4AB_HMF_refitting.R")
 
 # ---- Histograms STE72 indels
 HMF_indel= read.delim("indel_status_mc.txt")
