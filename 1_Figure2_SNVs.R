@@ -8,7 +8,7 @@
 dir = paste0("working directory", "Genotoxic_Ecoli")
 
 setwd(dir)
-source("Utils_GE.R")
+source("Utils.R")
 
 vcf_list = list.files("Data/STE0072/I5/SNVs", pattern = ".vcf", full.names = T)
 names = gsub("_72C12TM0_Q50_CGQ10_SGQ99_PASS_20X_VAF0.3_NoY_nonBlacklist_final.vcf", "", basename(vcf_list))

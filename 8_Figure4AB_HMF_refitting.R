@@ -6,7 +6,7 @@
 # NOTE: This script uses patient-level somatic variant and clinical data obtained from the Hartwig Medical Foundation. 
 
 # ---- HMF -----
-# NOTE: This script uses patient-level somatic variant and clinical data have been obtained from the Hartwig Medical Foundation under the data request number DR-084. Somatic variant and clinical data are freely available for academic use from the Hartwig Medical Foundation through standardized procedures. Privacy and publication policies, including co-authorship policies, can be retrieved from: https://www.hartwigmedicalfoundation.nl/en/data-policy/. 
+# NOTE: This script uses patient-level somatic variant and clinical data which have been obtained from the Hartwig Medical Foundation under the data request number DR-084. Somatic variant and clinical data are freely available for academic use from the Hartwig Medical Foundation through standardized procedures. Privacy and publication policies, including co-authorship policies, can be retrieved from: https://www.hartwigmedicalfoundation.nl/en/data-policy/. 
 # Data request forms can be downloaded from https://www.hartwigmedicalfoundation.nl/en/applying-for-data/.
 # To gain access to the data, this data request form should be emailed to info@hartwigmedicalfoundation.nl., upon which it will be evaluated within 6 weeks by the HMF Scientific Council and an independent Data Access Board.
 # When access is granted, the requested data become available through a download link provided by HMF.
