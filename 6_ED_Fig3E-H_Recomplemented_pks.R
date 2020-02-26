@@ -6,6 +6,7 @@
 
 ####_____________________Indel___________________####
 #List files
+setwd(dir)
 vcf_fnames = list.files("Data/STE0072/I3/Indels", recursive = T, full.names = T)
 ID_pks = read.delim("Output/ID_pks.txt")
 sample_names = gsub("_.*$", "", basename(vcf_fnames))

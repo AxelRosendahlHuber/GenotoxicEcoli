@@ -12,19 +12,19 @@
 # When access is granted, the requested data become available through a download link provided by HMF.
 
 # Mutation matrix can be generated using script 6: 
-setwd("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/Manuscript/Genotoxic_Ecoli/")
-source("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/Manuscript/Genotoxic_Ecoli/Utils.R")
-library("tidyverse")
+setwd(dir)
+source("Utils.R")
 
-mut_mat = read.delim("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/HMF/Analysis/Processed_data/HMF_mut_mat_noPASS.txt") %>% as.matrix()
-metadata = read.delim("~/surfdrive/Documents/Data_analysis/HMF/metadata.tsv")
+mut_mat = read.delim("Mutation Matrix generated from HMF data") %>% as.matrix()
+metadata = read.delim("Metadata file obtained from HMF")
 metadata$mutmat_cols = colnames(mut_mat)
 
 mut_mat_colon = mut_mat[,metadata$sampleId[metadata$primaryTumorLocation == "Colon/Rectum"]]
-write.table(mut_mat_colon, "~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/HMF/Analysis/Processed_data/HMF_mut_mat_colon_PASS.txt", quote = F, sep = "\t")
 
-working_sigs = read.delim("~/surfdrive/Shared/Boxtel_General/Data/Sigs/SBS/sigProfiler_SBS_working_signatures.txt")[,-1:-2]
-SBS_pks_subtracted = read.delim("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/I5/STE0072/SBS_pks_subtracted.txt")
+working_sigs = # Read in sigProfiler signatures from Alexandrov et al., 2020. https://www.synapse.org/#!Synapse:syn12009743. 
+  # All signatures indicated as 'Possible sequencing artefacts' on https://cancer.sanger.ac.uk/cosmic/signatures/SBS/ are removed from this list. 
+  
+SBS_pks_subtracted = read.delim("Output/SBS_pks_subtracted.txt")
 all_sigs = cbind(working_sigs, SBS_pks_subtracted) %>% as.matrix()
 all_sigs = prop.table(all_sigs,2)
 fit_res = fit_to_signatures(mut_mat, all_sigs)
@@ -43,26 +43,23 @@ metadata_ordered = metadata[order(rel_contribution[48,], decreasing = T),]
 data_SBS_pks$tissue = metadata_ordered$primaryTumorLocation[1:20]
 contribution_plot = ggplot(data_SBS_pks, aes(x = name, y = SBS_pks, fill = tissue)) + geom_bar(stat = "identity", alpha = 0.85) + 
   theme_BM() +scale_y_continuous(expand = c(0, 0), limits = c(0, 0.8), breaks = c(0,0.2, 0.4,0.6, 0.8)) + scale_fill_manual(values = c("#d95f02", "#1b9e77", "#7570b3"))
-ggsave("Plots/HMF_relative_SNVs_contribution_barplot_SBS_pksPASS.pdf", contribution_plot, width = 5, height = 4.5)
+ggsave("Figures/Main/Figure4/FigureA.pdf", contribution_plot, width = 5, height = 4.5)
 
 # ----- Indels 
 ##########Documentation for the indel and dbs profiles############
 library(pracma)
-ref_genome = "BSgenome.Hsapiens.UCSC.hg19"
-setwd("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/HMF/Analysis/")
-
 #  Read processed indel file from HMF
-metadata = read.delim("~/surfdrive/Documents/Data_analysis/HMF/metadata.tsv")
 name = c(NA, NA, paste0(metadata$sampleId, "_", metadata$primaryTumorLocation))
 
-indel_counts = read.delim("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/HMF/Analysis/Processed_data/Indel_counts_PASS.txt")
+indel_counts = read.delim("Indel Mutation Matrix generated from HMF data. See folder HMF for script to obtain this matrix")
 indel_counts$muttype = factor(x = indel_counts$muttype, levels = c("C_deletion","T_deletion","C_insertion","T_insertion","2bp_deletion","3bp_deletion","4bp_deletion","5+bp_deletion","2bp_insertion","3bp_insertion","4bp_insertion","5+bp_insertion","2bp_deletion_with_microhomology","3bp_deletion_with_microhomology","4bp_deletion_with_microhomology","5+bp_deletion_with_microhomology"))
 indel_counts_named = rbind(indel_counts, name)
 colnames(indel_counts_named)[3:3670] = indel_counts_named[84,3:3670]
 indel_counts_named = indel_counts_named[-84,]
 indel_counts_named[,3:3668] = lapply(indel_counts_named[,3:3668], as.integer)
-id_sigs = read.csv("~/surfdrive/Shared/Boxtel_General/Data/Sigs/ID/sigProfiler_ID_signatures.csv")
-ID_pks = read.delim("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/I5/STE0072/Indels/ID_pks.txt")
+
+id_sigs = # Read in sigProfiler indel signatures from Alexandrov et al., 2020. https://www.synapse.org/#!Synapse:syn12009743. 
+ID_pks = read.delim("Output/ID_pks.txt")
 id_sigs$ID_pks = ID_pks$x
 row.names(id_sigs) = id_sigs[,1]
 id_sigs = as.matrix(id_sigs[,-1])
@@ -79,8 +76,6 @@ rel_contribution_order = rel_contribution[,order(rel_contribution[18,], decreasi
 rel_contribution_order_indel = rel_contribution[,order(rel_contribution[18,], decreasing = T)]
 
 counts = indel_counts_named[,c("muttype", "muttype_sub",names_top_IDpks)]
-indel_context_per_sample = plot_indel_contexts(counts = indel_counts_named[,c("muttype", "muttype_sub",names_top_IDpks)])
-ggsave("Indels/HMF_relative_indel_contribution_profilesPASS.pdf", indel_context_per_sample, width = 12, height = 15)
 
 # Plot figure 4
 data_Indel_pks = data.frame(name = colnames(rel_contribution_order[,1:20]), Indel_pks = rel_contribution_order[18,1:20])
@@ -90,6 +85,8 @@ data_Indel_pks$tissue = metadata_ordered$primaryTumorLocation[1:20]
 contribution_plot = ggplot(data_Indel_pks, aes(x = name, y = Indel_pks, fill = tissue)) + geom_bar(stat = "identity", alpha = 0.85) + 
   theme_BM() +scale_y_continuous(expand = c(0, 0), limits = c(0, 0.8), breaks = c(0, 0.2, 0.4, 0.6, 0.8)) + scale_fill_manual(values = c('#d95f02', '#1b9e77','#e7298a','#66a61e','#7570b3'))
 contribution_plot 
+ggsave("Figures/Main/Figure4/FigureB.pdf", indel_context_per_sample, width = 12, height = 15)
+
 
 
 # ----- Analyze correlation of signatures 
@@ -114,20 +111,9 @@ all_plot = ggplot(correlation, aes(x= indel, y = snv, color = tissue)) + geom_po
   scale_color_manual(values = c("#d95f02", "#1b9e77",  "#bdbdbd", "#7570b3"))
 all_plot
 
-ggsave("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/HMF/Analysis/Correlation_IDpks_SBS_pks_PASS.pdf", 
-       all_plot, width = 7, height = 5, useDingbats = F)
+ggsave("Figures/Main/Figure4/FigureC.pdf", all_plot, width = 7, height = 5, useDingbats = F)
 
 rsq(correlation_colon$indel,correlation_colon$snv)
-
-# Correlation dot plot for colorectal samples
-correlation_colon = correlation[correlation$tissue == "Colon/Rectum",]
-colon_plot = ggplot(correlation_colon, aes(x= indel, y = snv, color = tissue)) + geom_point(alpha = 0.7,size =2, ) + 
-  geom_hline(yintercept =  0.05, linetype = "dashed", color = "#828282") + geom_vline(xintercept = 0.05, linetype = "dashed", color = "#828282") + theme_BM() +
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 0.5)) +scale_x_continuous(expand = c(0, 0), limits = c(0,0.6), breaks = c(0, 0.1,0.2,0.3,0.4,0.5))  +
-  scale_color_manual(values = c("#d95f02", "#1b9e77",  "#bdbdbd", "#7570b3"))
-colon_plot
-ggsave("~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/HMF/Analysis/Correlation_colon_IDpks_SBS_pks_PASS.pdf", 
-       colon_plot, width = 7, height = 5, useDingbats = F)
 
 correlation_colon_SBS_ID_positive =correlation_colon[correlation_colon$indel > 0.05 & correlation_colon$snv > 0.05, ]
 correlation_colon_n = rownames(correlation_colon_SBS_ID_positive)

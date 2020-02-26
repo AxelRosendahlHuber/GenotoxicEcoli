@@ -14,6 +14,7 @@ library(ggplot2)
 library(tidyverse)
 library(magrittr)
 library(VariantAnnotation)
+library(pracma)
 
 # ======== Retrieve and source all functions ===== # 
 wd <- getwd()                       

@@ -5,7 +5,7 @@
 # Please direct any questions or comments to A.K.M.RosendahlHuber@prinsesmaximacentrum.nl
 
 # Enter input directory where .zip file is extracted: 
-dir = "~/surfdrive/Shared/Projects/Axel/Axel_GenoEcoli/Manuscript/Reproducible_code/"
+dir = paste0("working directory", "Genotoxic_Ecoli")
 
 setwd(dir)
 source("Utils_GE.R")

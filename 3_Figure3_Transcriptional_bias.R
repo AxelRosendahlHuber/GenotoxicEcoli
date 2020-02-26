@@ -5,6 +5,7 @@
 # Please direct any questions or comments to A.K.M.RosendahlHuber@prinsesmaximacentrum.nl
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 library(pracma)
+setwd(dir)
 genes_hg19 <- genes(TxDb.Hsapiens.UCSC.hg19.knownGene)
 
 SNV_vcf_folder = "Data/STE0072/I5/SNVs/"

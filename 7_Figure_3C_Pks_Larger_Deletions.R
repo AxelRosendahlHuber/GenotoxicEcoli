@@ -5,6 +5,7 @@
 # Please direct any questions or comments to A.K.M.RosendahlHuber@prinsesmaximacentrum.nl
 
 # Load data
+setwd(dir)
 vcf_fnames = list.files("Data/STE0072/I5/Indels/", recursive = T, full.names = T)
 sample_names = gsub("_.*$", "", basename(vcf_fnames))
 

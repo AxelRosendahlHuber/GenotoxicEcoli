@@ -1,17 +1,11 @@
 # Generate Mut_mat from the HMF data
-library(MutationalPatterns)
-library(BSgenome)
-library(BSgenome.Hsapiens.UCSC.hg19)
-library(reshape2)
 library(ggplot2)
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 library(pracma)
 library(matrixStats)
-library(VariantAnnotation)
-source("/hpc/pmc_vanboxtel/tools/scripts/Axel_misc/functions/MutationalPatterns_variables.R")
-setwd("/hpc/pmc_vanboxtel/projects/Axel_GenoEcoli/HMF_analysis/SNVs/")
+setwd(dir)
+source("Utils.R")
 genes_hg19 <- genes(TxDb.Hsapiens.UCSC.hg19.knownGene)
-ref_genome = "BSgenome.Hsapiens.UCSC.hg19"
 
 # ---- LOAD FUNCTIONS NEEDED TO OPERATE MULTI-CORE ON THE HPC  ----
 
@@ -140,7 +134,7 @@ mut_matrix2 = function (vcf_list, ref_genome)
 
 
 # --- READ SAMPLE NAMES
-vcfs_names = list.files("/hpc/pmc_vanboxtel/projects/Axel_GenoEcoli/HMF_analysis/somatics/", pattern = "somatic_SNV.vcf$", recursive = T, full.names = T) # HPC
+vcfs_names = list.files("HMF vcf folder", pattern = "somatic.vcf.gz$", recursive = T, full.names = T) # HPC
 vcfs_sample_names = gsub(".purple.somatic_SNV.vcf", "", basename(vcfs_names))
 
 mut_mat_list = list()
@@ -165,7 +159,7 @@ mut_mat = do.call("cbind", mut_mat_list)
 #mut_mat_s = do.call("cbind", mut_mat_s_list)
 
 #write.table(mut_mat_s,"Mut_mats/HMF_Mut_mat_s_noPASS.txt", quote = F, sep = "\t")
-write.table(mut_mat, "Mut_mats/HMF_mut_mat_noPASS.txt", quote = F, sep = "\t")
+write.table(mut_mat, "Output/HMF_mut_mat_noPASS.txt", quote = F, sep = "\t")
 
 
 

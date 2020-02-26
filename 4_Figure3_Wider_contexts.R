@@ -7,6 +7,7 @@
 # ===== LOAD LOCAL FUNCTIONS AND SET VARIABLES =====
 # Source script which load all preset functions and variables
 library(ggseqlogo)
+setwd(dir)
 options(stringsAsFactors = F)
 
 #  ------ Context SNVs

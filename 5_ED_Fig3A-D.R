@@ -5,6 +5,7 @@
 # Please direct any questions or comments to A.K.M.RosendahlHuber@prinsesmaximacentrum.nl
 
 # STE0076 Analysis
+setwd(dir)
 vcf_list = list.files("Data/STE0076/SNVs/", pattern = ".vcf", full.names = T)
 names = gsub("_STE0076TM0_Q50_CGQ10_SGQ99_PASS_20X_VAF0.3_NoY_nonBlacklist_final.vcf", "", basename(vcf_list))
 vcfs = read_vcfs_as_granges(vcf_files = vcf_list,names, genome = ref_genome)
