@@ -95,7 +95,9 @@ indel_list_subtracted$total = subtracted_indels
 
 # Save ID_pks signature 
 subtracted_indels_rel = subtracted_indels/sum(subtracted_indels)
-write.table(subtracted_indels_rel, "Output/ID_pks.txt", sep = "\t", quote = F)
+indel_counts_names = paste0(indel_counts$muttype, "_", indel_counts$muttype_sub)
+names(subtracted_indels_rel) = indel_counts_names
+write.table(subtracted_indels_rel, "Output/ID_pks.txt", sep = "\t", quote = F, col.names = F)
 
 # Indel subtype barplot
 del_counts = indel_counts[,-1:-2]
