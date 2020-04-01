@@ -4,6 +4,7 @@
 # Description: Set working directory, analyze single base substitutions (Figure 2B-C)
 # Please direct any questions or comments to A.K.M.RosendahlHuber@prinsesmaximacentrum.nl
 
+
 # Enter input directory where .zip file is extracted: 
 dir = paste0("", "Genotoxic_Ecoli")
 
@@ -52,7 +53,7 @@ cosine_heatmap = plot_cosine_heatmap(cosine_matrix, cluster_rows = F, plot_value
 ggsave("Figures/ExtendedData/Extended_data_figure_2/Cosine_similarity_SNVs.pdf", cosine_heatmap, width = 5, height = 5)
 
 # Generate barplots C>N T>N (Figure 2B)
-mut_mat = mut_mat[,-1:3]
+mut_mat = mut_mat[,-1:-3]
 mut_mat_N = data.frame("T-N" = colSums(mut_mat[49:96,]), "C-N" = colSums(mut_mat[1:48,]))
 mut_mat_N$name = rownames(mut_mat_N)
 mmut_mat_N = melt(mut_mat_N)
@@ -91,3 +92,4 @@ condensed_barplot_SNVs = ggplot(mean, aes(x = Coli, y = means, fill = variable )
 condensed_barplot_SNVs
 
 ggsave("Figures/Main/Figure2/Figure_2B_Condensed_barplot.pdf", condensed_barplot_SNVs, width = 2.7, height = 4)
+
