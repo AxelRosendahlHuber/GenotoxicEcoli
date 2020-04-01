@@ -57,7 +57,7 @@ indel_counts$EWT = rowSums(indel_counts[,9:11])
 indel_counts$subtracted = indel_counts$EWT - indel_counts$EKO
 indel_counts$subtracted[indel_counts$subtracted < 0] = 0
 
-indel_subtracted = indel_counts[,9:11]
+indel_subtracted = indel_counts[,c(14, 13, 15)]
 indel_subs = cbind(indel_counts[,1:2], indel_subtracted)
 names(indel_subs)[3:5] = c("deltaPKS", "EcoliWT", "Subtracted")
 indel_consensus_reordered = plot_indel_contexts(indel_subs, same_y = T)
