@@ -7,7 +7,7 @@ For questions or suggestions: Please contact a.k.m.rosendahlhuber@prinsesmaximac
 
 Please cite this paper when using this code for your research. BAM files containing the raw sequencing dat have been deposited at the European Genome-phenome Archive (https://ega-archive.org/) under the accesion code: EGAS00001003934.
 
-#####SBS-*pks* and ID-*pks* signatures can be found in the folder Output. 
+SBS-*pks* and ID-*pks* signatures can be found in the folder Output. 
 
 ### ---- Usage ----- 
 Workflow: For the most easily deployment, unzip Genotoxic_Ecoli.zip folder. Set working directory in script #1 and execute R scripts following numbering 1-9.
