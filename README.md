@@ -3,7 +3,7 @@ This Github repository contains the code and data to used for in the published s
 https://www.nature.com/articles/s41586-020-2080-8
 DOI: https://doi.org/10.1038/s41586-020-2080-8
 
-For questions or suggestions: Please contact a.k.m.rosendahlhuber@prinsesmaximacentrum.nl
+For questions or suggestions: Please contact axel.rosendahl@irbbarcelona.org
 
 Please cite this paper when using this code for your research. BAM files containing the raw sequencing dat have been deposited at the European Genome-phenome Archive (https://ega-archive.org/) under the accesion code: EGAS00001003934.
 
